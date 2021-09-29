@@ -25,9 +25,7 @@ RUN chsh -s $(which zsh)
 # Gives 256 colour options (as opposed to the 8 where TERM=term)
 ENV TERM=xterm-256color
 
-# Set aliases
-RUN echo "alias ls='ls -l'" >> ~/.zshrc
-
-RUN echo "PROMPT='🔥  %B%F{208}%D{%a %e %b}%f %F{red}%d %#%f%b '" >> ~/.zshrc
+COPY joshua.zsh-theme /root/.oh-my-zsh/themes/joshua.zsh-theme
+COPY default.zshrc /root/.zshrc
 
 CMD zsh
