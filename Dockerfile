@@ -28,6 +28,6 @@ ENV TERM=xterm-256color
 # Set aliases
 RUN echo "alias ls='ls -l'" >> ~/.zshrc
 
-RUN echo "PROMPT='🔥  %B%F{208}%D{%a %e %b}%f %F{red}%C%f %F{red}%#%f %b'" >> ~/.zshrc
+RUN echo "PROMPT='🔥  %B%F{208}%D{%a %e %b}%f %F{red}%d %#%f%b '" >> ~/.zshrc
 
 CMD zsh
