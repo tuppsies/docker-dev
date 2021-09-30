@@ -6,10 +6,7 @@ RUN apt install -y zsh
 RUN apt install -y curl
 RUN apt install -y git
 RUN apt install -y python # Required for the git plugin
-#RUN apt install -y fonts-powerline
-#RUN apt install -y python3
-#RUN apt install -y python3-pip
-#RUN pip3 install powerline-status
+
 
 # Install Terraform
 RUN apt install -y gnupg software-properties-common curl
