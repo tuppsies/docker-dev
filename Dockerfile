@@ -20,6 +20,13 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/awscliv
 RUN unzip /awscliv2.zip
 RUN ./aws/install
 
+# Install node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
+
+# Configure git
+RUN git config --global user.email "tupperwarec@hotmail.com"
+RUN git config --global user.name "Joshua Cahill"
 
 # Install Oh My ZSH
 RUN yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
