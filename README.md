@@ -13,7 +13,7 @@
 ### To run and include AWS and SSH keys
 `docker run -i -t --rm -v ~/.aws/:/root/.aws/ -v ~/repos/presidential-debates/:/presidential-debates/ -v ~/.ssh/:/root/.ssh/ dev`
 
-### This is a great cheatsheet of colours
-https://jonasjacek.github.io/colors/
-Emoji Symbols
-https://getemoji.com/
+### Helpful Hints
+[This is a great cheatsheet of colours](https://jonasjacek.github.io/colors/)
+
+[Emoji Symbols](https://getemoji.com/)
