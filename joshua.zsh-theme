@@ -13,11 +13,11 @@ function last_result {
 #}
 
 function date {
-    echo "%B%F{208}%D{%a %e %b}%f%b"
+    echo "%B%F{208}%D{%e %b}%f%b"
 }
 
 function working_directory {
-    echo "%B%F{red}%d %#%f%b"
+    echo "%B%F{red}%1d %#%f%b"
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
@@ -30,7 +30,7 @@ ZSH_THEME_GIT_PROMPT_CHANGED=" %{$fg[blue]%}%{✚%G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="⬇️"
 ZSH_THEME_GIT_PROMPT_AHEAD="⬆️"
 ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[brown]%}💩 "
-ZSH_THEME_GIT_PROMPT_STASHED=" %{$fg_bold[blue]%}📒"
+ZSH_THEME_GIT_PROMPT_STASHED=" %{$fg_bold[blue]%}📒 "
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg_bold[green]%}✅"
 
 PROMPT='$(last_result)  $(date) $(working_directory) $(git_super_status)'
