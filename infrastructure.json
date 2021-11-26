@@ -1,5 +1,11 @@
 {
-    "Resources": {
+    "Parameters" : {
+        "ProjectName" : {
+            "Type" : "String",
+            "Default" : "dev-machine"
+        }
+    },
+    "Resources" : {
         "DevelopmentInstance": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
@@ -28,7 +34,7 @@
                 "Tags": [
                     {
                         "Key": "Name",
-                        "Value": "development-machine"
+                        "Value": { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "instance" ] ] }
                     }
                 ],
                 "UserData": {
@@ -55,8 +61,8 @@
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
                 "VpcId": "vpc-d6f18eb1",
-                "GroupDescription": "A security group for the development instance.",
-                "GroupName": "dev-machine-security-group",
+                "GroupName": { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "security-group" ] ] },
+                "GroupDescription" : "Locked down security group for the dev machine",
                 "SecurityGroupEgress": [
                     {
                         "CidrIp": "0.0.0.0/0",
@@ -84,7 +90,7 @@
                 "Tags": [
                     {
                         "Key": "Name",
-                        "Value": "development-instance"
+                        "Value": { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "elastic-ip" ] ] }
                     }
                 ]
             }
@@ -92,7 +98,7 @@
         "IAMAdminRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
-                "RoleName" : "development-machine-role",
+                "RoleName" : { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "role" ] ] },
                 "AssumeRolePolicyDocument": {
                     "Version": "2012-10-17",
                     "Statement": [
@@ -109,7 +115,7 @@
                         }
                     ]
                 },
-                "Description": "Provide AWS admin permissions to the development machine",
+                "Description": "Provide AWS admin permissions",
                 "ManagedPolicyArns": [
                     "arn:aws:iam::aws:policy/AdministratorAccess"
                 ]
@@ -118,14 +124,15 @@
         "InstanceProfile" : {
             "Type" : "AWS::IAM::InstanceProfile",
             "Properties" : {
-                "InstanceProfileName" : "development-machine-instance-profile",
+                "InstanceProfileName" : { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "instance-profile" ] ] },
                 "Roles" : [ { "Ref" : "IAMAdminRole" } ]
             }
         },
         "Alarm" : {
             "Type": "AWS::CloudWatch::Alarm",
             "Properties": {
-                "AlarmName": "stop-development-machine",
+                "AlarmName": { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "alarm" ] ] },
+                "AlarmDescription" : "Stop the instance if we notice that the network usage drops.",
                 "ActionsEnabled": true,
                 "OKActions": [],
                 "AlarmActions": [
