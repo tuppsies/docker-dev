@@ -78,6 +78,12 @@
                         "ToPort": 22,
                         "IpProtocol": "tcp"
                     }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": { "Fn::Join" : [ "-", [ { "Ref" : "ProjectName" }, "instance" ] ] }
+                    }
                 ]
             }
         },
