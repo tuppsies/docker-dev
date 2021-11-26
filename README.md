@@ -30,7 +30,7 @@ Features:
 
 ### To deploy the CloudFormation template
 
-`aws cloudformation deploy --stack-name dev --template-file instance.json`
+`aws cloudformation deploy --stack-name dev --template-file instance.jsonaws cloudformation deploy --stack-name dev --template-file infrastructure.json --capabilities CAPABILITY_NAMED_IAM --tags Project=Development-Machine`
 
 ### To destroy the CloudFormation template
 
