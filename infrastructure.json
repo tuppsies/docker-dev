@@ -2,7 +2,7 @@
     "Parameters" : {
         "ProjectName" : {
             "Type" : "String",
-            "Default" : "dev-machine"
+            "Default" : "remote-dev-machine"
         }
     },
     "Resources" : {
