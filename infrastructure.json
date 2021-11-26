@@ -121,7 +121,33 @@
                 "InstanceProfileName" : "development-machine-instance-profile",
                 "Roles" : [ { "Ref" : "IAMAdminRole" } ]
             }
+        },
+        "Alarm" : {
+            "Type": "AWS::CloudWatch::Alarm",
+            "Properties": {
+                "AlarmName": "stop-development-machine",
+                "ActionsEnabled": true,
+                "OKActions": [],
+                "AlarmActions": [
+                    "arn:aws:swf:ap-southeast-2:238417454909:action/actions/AWS_EC2.InstanceId.Stop/1.0"
+                ],
+                "InsufficientDataActions": [],
+                "MetricName": "NetworkIn",
+                "Namespace": "AWS/EC2",
+                "Statistic": "Average",
+                "Dimensions": [
+                    {
+                        "Name": "InstanceId",
+                        "Value": { "Ref" : "DevelopmentInstance" }
+                    }
+                ],
+                "Period": 300,
+                "EvaluationPeriods": 6,
+                "DatapointsToAlarm": 6,
+                "Threshold": 8000,
+                "ComparisonOperator": "LessThanThreshold",
+                "TreatMissingData": "missing"
+            }
         }
-
     }
 }
