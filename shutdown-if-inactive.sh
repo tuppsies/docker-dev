@@ -21,7 +21,7 @@ STATUS=$(netstat | grep ssh | grep ESTABLISHED &>/dev/null && echo active || ech
 if [ "$STATUS" == "inactive" ]; then
   if [ -f "$MARKER_FILE" ]; then
     echo "Powering off due to ssh inactivity."
-    poweroff  # See https://unix.stackexchange.com/a/196014/56711
+    shutdown now
   else
     # Create a marker file so that it will shut down if still inactive on the next time this script runs.
     touch "$MARKER_FILE"
