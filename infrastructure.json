@@ -44,13 +44,16 @@
                             [
                                 "#!/bin/bash -ex\n",
                                 "yum update -y\n",
-                                "yes | sudo amazon-linux-extras install docker\n",
+                                "yes | amazon-linux-extras install docker\n",
                                 "yum -y install git\n",
                                 "git clone https://github.com/tuppsies/docker-dev.git /home/ec2-user/repos/docker-dev/\n",
-                                "sudo systemctl enable docker.service\n",
-                                "sudo systemctl start docker.service\n",
+                                "systemctl enable docker.service\n",
+                                "systemctl start docker.service\n",
                                 "usermod -aG docker ec2-user\n",
-                                "docker build --no-cache --rm -t dev /home/ec2-user/repos/docker-dev/\n"
+                                "docker build --no-cache --rm -t dev /home/ec2-user/repos/docker-dev/\n",
+                                "cp /home/ec2-user/repos/docker-dev/shutdown-if-inactive.sh /home/shutdown-if-inactive.sh\n",
+                                "chmod +x /home/shutdown-if-inactive.sh\n",
+                                "(echo '*/15 * * * * sudo /home/shutdown-if-inactive.sh >> /tmp/shutdown-log.txt 2>&1')| crontab -"
                             ]
                         ]
                     }
