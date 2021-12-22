@@ -24,9 +24,11 @@ if [ "$STATUS" == "inactive" ]; then
     shutdown now
   else
     # Create a marker file so that it will shut down if still inactive on the next time this script runs.
+    echo "Creating marker file"
     touch "$MARKER_FILE"
   fi
 else
   # Delete marker file if it exists
+  echo "Deleting marker file"
   rm --force "$MARKER_FILE"
 fi
