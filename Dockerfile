@@ -1,12 +1,13 @@
 FROM ubuntu:18.04
 
+# Install some essential tools
 RUN apt-get update
 RUN apt install -y vim
 RUN apt install -y zsh
 RUN apt install -y curl
 RUN apt install -y git
 RUN apt install -y python # Required for the git plugin
-
+RUN apt install -y mysql-server
 
 # Install Terraform
 RUN apt install -y gnupg software-properties-common curl
