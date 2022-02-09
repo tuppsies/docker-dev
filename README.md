@@ -45,3 +45,7 @@ Note that if you destroy and re-deploy the CloudFormation stack it will generate
 [This is a great cheatsheet of colours](https://jonasjacek.github.io/colors/)
 
 [Emoji Symbols](https://getemoji.com/)
+
+[Command Line Prompt Expansion Reference](https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html)
+
+[Oh My ZSH git-prompt Plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-prompt)
