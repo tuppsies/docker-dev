@@ -30,7 +30,7 @@ It will deploy the following:
 
 When the instance is launched the Docker image is automatically built as part of the user data script. You can then use [remote SSH in vscode](https://code.visualstudio.com/docs/remote/ssh) to connect to the EC2 instance and then run and enter the Docker container.
 
-Note that if you destroy and re-deploy the CloudFormation stack it will generate a new Elastic IP.
+Note that if you destroy and re-deploy the CloudFormation stack it will generate a new Elastic IP and so you will have to update your VS Code settings.
 
 ### To deploy the CloudFormation template
 
@@ -39,6 +39,12 @@ Note that if you destroy and re-deploy the CloudFormation stack it will generate
 ### To destroy the CloudFormation template
 
 `aws cloudformation delete-stack --stack-name remote-dev-machine`
+
+### Generating a new SSH Key on the EC2 Instance
+
+`ssh-keygen -t ed25519 -C "tupperwarec@hotmail.com"`
+
+[GitHub instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 ## Helpful Hints
 
