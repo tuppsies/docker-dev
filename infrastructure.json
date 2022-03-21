@@ -27,7 +27,7 @@
                         "Ebs": {
                             "DeleteOnTermination": true,
                             "Encrypted": true,
-                            "VolumeSize": 8
+                            "VolumeSize": 64
                         }
                     }
                 ],
