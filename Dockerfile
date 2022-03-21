@@ -2,22 +2,22 @@ FROM ubuntu:18.04
 
 # Install some essential tools
 RUN apt-get update
-RUN apt install -y vim
-RUN apt install -y zsh
-RUN apt install -y curl
-RUN apt install -y git
-RUN apt install -y python # Required for the git plugin
-RUN apt install -y mysql-server
-RUN apt install -y zip
+RUN apt-get install -y vim
+RUN apt-get install -y zsh
+RUN apt-get install -y curl
+RUN apt-get install -y git
+RUN apt-get install -y python # Required for the git plugin
+RUN apt-get install -y mysql-server
+RUN apt-get install -y zip
 
 # Install Terraform
-RUN apt install -y gnupg software-properties-common curl
+RUN apt-get install -y gnupg software-properties-common curl
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
 RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN apt install -y terraform
+RUN apt-get install -y terraform
 
 # Install the AWS CLI
-RUN apt install -y unzip
+RUN apt-get install -y unzip
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/awscliv2.zip"
 RUN unzip /awscliv2.zip
 RUN ./aws/install

@@ -12,11 +12,11 @@ The Docker container contains a number of tools that I find useful for software 
 
 ### To run and enter the Docker container
 
-`docker run -i -t --rm dev`
+`docker run -it --rm dev`
 
 ### To run and enter the Docker container and map your local AWS credentials and SSH keys
 
-`docker run -i -t --rm -v ~/.aws/:/root/.aws/ -v ~/.ssh/:/root/.ssh/ dev`
+`docker run -it --rm -v ~/.aws/:/root/.aws/ -v ~/.ssh/:/root/.ssh/ dev`
 
 ## AWS Infrastructure
 
