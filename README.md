@@ -46,6 +46,10 @@ Note that if you destroy and re-deploy the CloudFormation stack it will generate
 
 [GitHub instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
+### Setting global git settings on the EC2 Instance
+RUN git config --global user.email "tupperwarec@hotmail.com"
+RUN git config --global user.name "Joshua Cahill"
+
 ## Helpful Hints
 
 [This is a great cheatsheet of colours](https://jonasjacek.github.io/colors/)
