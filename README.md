@@ -40,15 +40,26 @@ Note that if you destroy and re-deploy the CloudFormation stack it will generate
 
 `aws cloudformation delete-stack --stack-name remote-dev-machine`
 
-### Generating a new SSH Key on the EC2 Instance
+### Actions to take following the termination and creation of an EC2 instance
 
-`ssh-keygen -t ed25519 -C "tupperwarec@hotmail.com"`
+#### Remove the old SSH connection
+You need to remove the entry in the `.ssh/known_hosts` files on both WSL and on Windows in `C:/Users/[User]/.ssh`
 
-[GitHub instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+This can be done in a text editor or by following a command similar to below
 
-### Setting global git settings on the EC2 Instance
-RUN git config --global user.email "tupperwarec@hotmail.com"
-RUN git config --global user.name "Joshua Cahill"
+`ssh-keygen -f "/home/joshua/.ssh/known_hosts" -R "ec2-54-79-66-52.ap-southeast-2.compute.amazonaws.com"`
+
+#### Updating SSH Key in GitHub
+
+The user script for the EC2 instance generates SSH keys for the instance. They just need to be added to your GitHub account.
+
+More detail on GitHub SSH keys can be found [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+#### Setting global git settings on the EC2 Instance
+
+`git config --global user.email "tupperwarec@hotmail.com"`
+
+`git config --global user.name "Joshua Cahill"`
 
 ## Helpful Hints
 
