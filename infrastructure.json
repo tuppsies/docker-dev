@@ -9,12 +9,12 @@
         "DevelopmentInstance": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
-                "ImageId": "ami-0c9f90931dd48d1f2",
-                "InstanceType": "t2.micro",
+                "ImageId": "ami-059af0b76ba105e7e",
+                "InstanceType": "t3a.medium",
                 "KeyName": "development-machine",
                 "IamInstanceProfile" : { "Ref" : "InstanceProfile" },
                 "HibernationOptions": {
-                    "Configured": true
+                    "Configured": false
                 },
                 "SecurityGroupIds": [
                     {
@@ -53,7 +53,11 @@
                                 "docker build --no-cache --rm -t dev /home/ec2-user/repos/docker-dev/\n",
                                 "cp /home/ec2-user/repos/docker-dev/shutdown-if-inactive.sh /home/shutdown-if-inactive.sh\n",
                                 "chmod +x /home/shutdown-if-inactive.sh\n",
-                                "(echo '*/15 * * * * sudo /home/shutdown-if-inactive.sh >> /tmp/shutdown-log.txt 2>&1')| crontab -"
+                                "chown -R ec2-user ~/repos/\n",
+                                "(echo '*/15 * * * * sudo /home/shutdown-if-inactive.sh >> /tmp/shutdown-log.txt 2>&1')| crontab -\n",
+                                " ssh-keygen -t ed25519 -N '' -C 'tupperwarec@hotmail.com' -f ~/.ssh/id_ed25519\n",
+                                "eval '$(ssh-agent -s)'\n",
+                                "ssh-add ~/.ssh/id_ed25519"
                             ]
                         ]
                     }
@@ -79,6 +83,12 @@
                         "CidrIp": "0.0.0.0/0",
                         "FromPort": 22,
                         "ToPort": 22,
+                        "IpProtocol": "tcp"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "IpProtocol": "tcp"
                     }
                 ],
