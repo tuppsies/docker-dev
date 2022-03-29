@@ -9,6 +9,7 @@ RUN apt-get install -y git
 RUN apt-get install -y python # Required for the git plugin
 RUN apt-get install -y mysql-server
 RUN apt-get install -y zip
+RUN apt-get install -y python3-pip
 
 # Install Terraform
 RUN apt-get install -y gnupg software-properties-common curl
