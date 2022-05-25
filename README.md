@@ -36,6 +36,10 @@ Note that if you destroy and re-deploy the CloudFormation stack it will generate
 
 `aws cloudformation deploy --stack-name remote-dev-machine --template-file infrastructure.json --capabilities CAPABILITY_NAMED_IAM --tags Project=Development-Machine`
 
+### To create a CloudFormation change set
+
+`aws cloudformation create-change-set --template-body file://infrastructure.json --stack-name remote-dev-machine --capabilities CAPABILITY_NAMED_IAM --change-set-name [name]`
+
 ### To destroy the CloudFormation template
 
 `aws cloudformation delete-stack --stack-name remote-dev-machine`
@@ -44,9 +48,10 @@ Note that if you destroy and re-deploy the CloudFormation stack it will generate
 
 #### Remove the old SSH connection
 
-You need to remove the entry in the `.ssh/known_hosts` files on both WSL and on Windows in `C:/Users/[User]/.ssh`
+You need to remove the entry in WSL `~/.ssh/known_hosts` and the host Windows in `C:/Users/[User]/.ssh`
 
-This can be done in a text editor or by following a command similar to below
+On WSL this can be done by running the following command: `ssh-keygen -f "/home/joshua/.ssh/known_hosts" -R "3.24.248.190"`
+Make sure to swap the IP out address (although you shouldn't need to do it often since it's an elastic IP)
 
 `ssh-keygen -f "/home/joshua/.ssh/known_hosts" -R "ec2-[something].ap-southeast-2.compute.amazonaws.com"`
 
@@ -58,7 +63,7 @@ You need to add them to your key chain and then to your GitHub account.
 
 To add them to your key chain, log in to your EC2 instance (as ec2-user) and run the following:
 
-`eval $(ssh-agent) ssh-add /home/ec2-user/.ssh/id_ed25519\`
+`eval $(ssh-agent) ssh-add /home/ec2-user/.ssh/id_ed25519`
 
 More detail on GitHub SSH keys can be found [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
@@ -86,6 +91,6 @@ More detail on GitHub SSH keys can be found [here](https://docs.github.com/en/au
 
 `runuser --command \"eval $(ssh-agent) ssh-add /home/ec2-user/.ssh/id_ed25519\" - ec2-user`
 
-- Install the vestij repo
+- Install the Vestij repo
 
-- Run npm install on the frontend/ directory (as this seems to take quite a while)
+- Run `npm install` on the Vestij `frontend/` directory (as this seems to take quite a while)
