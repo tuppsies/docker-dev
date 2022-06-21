@@ -29,6 +29,10 @@ RUN ./aws/install
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
 
+# Install typescript
+RUN npm install -g typescript
+RUN npm install -g ts-node
+
 # Configure git
 RUN git config --global user.email "tupperwarec@hotmail.com"
 RUN git config --global user.name "Joshua Cahill"
