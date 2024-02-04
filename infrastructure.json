@@ -9,7 +9,7 @@
         "DevelopmentInstance": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
-                "ImageId": "ami-0c9f90931dd48d1f2",
+                "ImageId": "ami-03b4905c5f84d954b",
                 "InstanceType": "t3a.xlarge",
                 "KeyName": "development-machine",
                 "IamInstanceProfile" : { "Ref" : "InstanceProfile" },
@@ -27,7 +27,7 @@
                         "Ebs": {
                             "DeleteOnTermination": true,
                             "Encrypted": true,
-                            "VolumeSize": 20,
+                            "VolumeSize": 40,
                             "VolumeType" : "gp3"
                         }
                     }
@@ -46,7 +46,7 @@
                                 "#!/bin/bash -ex\n",
                                 "exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1\n",
                                 "yum update -y\n",
-                                "yes | amazon-linux-extras install docker\n",
+                                "yes | yum install -y docker\n",
                                 "yum -y install git\n",
                                 "git clone https://github.com/tuppsies/docker-dev.git /home/ec2-user/repos/docker-dev/\n",
                                 "systemctl enable docker.service\n",
@@ -56,6 +56,9 @@
                                 "cp /home/ec2-user/repos/docker-dev/shutdown-if-inactive.sh /home/shutdown-if-inactive.sh\n",
                                 "chmod +x /home/shutdown-if-inactive.sh\n",
                                 "runuser -u ec2-user -- ssh-keygen -t ed25519 -N '' -C 'tupperwarec@hotmail.com' -f /home/ec2-user/.ssh/id_ed25519\n",
+                                "sudo yum install cronie -y\n",
+                                "sudo systemctl enable crond.service\n",
+                                "sudo systemctl start crond.service\n",
                                 "(echo '*/15 * * * * sudo /home/shutdown-if-inactive.sh >> /tmp/shutdown-log.txt 2>&1')| crontab -\n",
                                 "chown -R ec2-user /home/ec2-user/repos/"
                             ]

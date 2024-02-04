@@ -57,7 +57,8 @@ Make sure to swap the IP out address (although you shouldn't need to do it often
 
 #### Updating SSH Key in GitHub
 
-The user data script for the EC2 instance generates SSH keys for the instance.
+The user data script for the EC2 instance generates SSH keys for the instance on the instance.
+You can retrieve them by SSH'ing into the instance using `ssh ec2-user@[elastic_ip] -i [key-file]`
 
 You need to add them to your key chain and then to your GitHub account.
 
