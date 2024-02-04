@@ -26,7 +26,7 @@ RUN unzip /awscliv2.zip
 RUN ./aws/install
 
 # Install node.js as per the README at https://github.com/nodesource/distributions
-ARG NODE_MAJOR=20
+ARG NODE_MAJOR=18
 RUN apt-get install -y ca-certificates curl gnupg
 RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
