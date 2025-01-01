@@ -12,6 +12,7 @@ RUN apt-get install -y python # Required for the git plugin
 RUN apt-get install -y mysql-server
 RUN apt-get install -y zip
 RUN apt-get install -y python3-pip
+#RUN apt-get install -y sudo
 
 # Install Terraform v1.9.0
 RUN apt-get install -y gnupg software-properties-common curl
@@ -42,16 +43,23 @@ RUN npm install -g ts-node
 RUN git config --global user.email "tupperwarec@hotmail.com"
 RUN git config --global user.name "Joshua Cahill"
 
-# Install Oh My ZSH
-RUN yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Create a user with ID 1000 and configure ZSH for this user
+RUN useradd -m -s /usr/bin/zsh -u 1000 docker && \
+    echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# Set the default shell to ZSH
-RUN chsh -s $(which zsh)
+USER docker
+WORKDIR /home/docker
+
+# Install Oh My ZSH for the new user
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
+
+# Set ZSH theme and configuration
+COPY joshua.zsh-theme /home/docker/.oh-my-zsh/themes/joshua.zsh-theme
+COPY default.zshrc /home/docker/.zshrc
 
 # Gives 256 colour options (as opposed to the 8 where TERM=term)
 ENV TERM=xterm-256color
 
-COPY joshua.zsh-theme /root/.oh-my-zsh/themes/joshua.zsh-theme
-COPY default.zshrc /root/.zshrc
+# Set the default shell to ZSH and start as docker
+CMD ["zsh"]
 
-CMD zsh
