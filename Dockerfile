@@ -12,6 +12,7 @@ RUN apt-get install -y python # Required for the git plugin
 RUN apt-get install -y mysql-server
 RUN apt-get install -y zip
 RUN apt-get install -y python3-pip
+RUN apt-get install -y jq
 #RUN apt-get install -y sudo
 
 # Install Terraform v1.9.0
